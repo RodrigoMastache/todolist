@@ -1,8 +1,18 @@
-function TodoList() {
+import TodoCard from "./TodoCard";
+
+function TodoList(props) {
+  const { todos } = props;
+
   return (
-    <>
-      <p>TodoList component</p>
-    </>
+    <ul className="main">
+      {todos.map((todo, todoIndex) => {
+        return (
+          <TodoCard {...props} key={todoIndex} index={todoIndex}>
+            <p>{todo}</p>
+          </TodoCard>
+        );
+      })}
+    </ul>
   );
 }
 
