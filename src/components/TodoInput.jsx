@@ -1,7 +1,6 @@
-import { useState } from "react";
-
 function TodoInput(props) {
   const { handleAddTodos, todoValue, setTodoValue } = props;
+
   return (
     <header>
       <input
@@ -9,13 +8,21 @@ function TodoInput(props) {
         onChange={(e) => {
           setTodoValue(e.target.value);
         }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && todoValue.trim() !== "") {
+            handleAddTodos(todoValue);
+            setTodoValue("");
+          }
+        }}
         type="text"
         placeholder="Enter ToDo item ..."
       />
       <button
         onClick={() => {
-          handleAddTodos(todoValue);
-          setTodoValue("");
+          if (todoValue.trim() !== "") {
+            handleAddTodos(todoValue);
+            setTodoValue("");
+          }
         }}
       >
         Add
